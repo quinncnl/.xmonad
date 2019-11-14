@@ -1,0 +1,4 @@
+
+xmonad.hs:77:20: warning: [-Wdeprecations]
+    In the use of ‘defaultXPConfig’ (imported from XMonad.Prompt):
+    Deprecated: "Use def (from Data.Default, and re-exported from XMonad.Prompt) instead."
