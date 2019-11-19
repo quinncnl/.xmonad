@@ -29,7 +29,9 @@ import           XMonad.Prompt.Input
 import qualified XMonad.StackSet                 as W
 import           XMonad.Util.EZConfig
 import           XMonad.Util.Scratchpad
-import XMonad.Util.Run(spawnPipe)
+import           XMonad.Util.Run(spawnPipe)
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.Place
 
 import           Data.Ratio                      ((%))
 
@@ -78,7 +80,10 @@ main = do
       allLayouts = ["tall", "wide", "circle", "full", "tabbed", "accordion"]
 
       -- manageHook
+      myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
+
       myManageHook =     manageDocks
+                     <+> placeHook myPlacement
                      <+> floatHook
                      <+> fullscreenManageHook
                      <+> scratchpadManageHookDefault
@@ -86,7 +91,7 @@ main = do
       -- className is the second.
       floatHook = composeAll [ appName =? "gimp-2.8"    --> doFloat
                              , className =? "Iceweasel" --> doF (W.shift "1")
-                             , appName =? "Pidgin"      --> doF (W.shift "8")
+                             , appName =? "NaviSimulator"   --> doF (W.shift "4")
                              , appName =? "xfrun4"      --> doFloat
                              , appName =? "NavApp"      --> doFloat
                              ]
