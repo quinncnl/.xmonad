@@ -1,7 +1,7 @@
 import           XMonad                          hiding ((|||))
-import           XMonad.Config.Kde
 import           XMonad.Hooks.EwmhDesktops
-import XMonad.Layout.Spacing
+import           XMonad.Config.Kde
+import           XMonad.Layout.Spacing
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.UrgencyHook
 import           XMonad.Layout.DecorationMadness
@@ -57,7 +57,7 @@ main = do
       myManageHook =     manageDocks
                      <+> floatHook
                      <+> fullscreenManageHook
-                     <+> scratchpadManageHookDefault
+                     <+> scratchpadManageHook (W.RationalRect 0.4 0.5 0.4 0.3)
       -- Inspect with xprop: appName is the first element in WM_CLASS, while
       -- className is the second.
       floatHook = composeAll [ appName =? "gimp-2.8"    --> doFloat
