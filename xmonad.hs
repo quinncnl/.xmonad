@@ -35,6 +35,7 @@ main :: IO ()
 main = do
   xmproc <- spawnPipe "/home/clear/.cabal/bin/xmobar /home/clear/.xmonad/xmobarrc.hs"
   xmproc <- spawnPipe "nitrogen --restore"
+  xmproc <- spawnPipe "/usr/local/pulse/pulseUi"
   xmproc <- spawnPipe "google-chrome"
   xmproc <- spawnPipe "emacs"
   xmonad $ ewmh kde4Config
@@ -48,7 +49,6 @@ main = do
   where
       -- keybindings
       myKeys = [ ((mod4Mask,                 xK_c           ), spawn "google-chrome")
-               , ((mod4Mask,                 xK_r           ), spawn "emacs")
                , ((mod4Mask,                 xK_u           ), scratchpad)
                , ((mod4Mask,                 xK_y           ), focusUrgent)
                ]
@@ -57,7 +57,7 @@ main = do
       myManageHook =     manageDocks
                      <+> floatHook
                      <+> fullscreenManageHook
-                     <+> scratchpadManageHook (W.RationalRect 0.4 0.5 0.4 0.3)
+                     <+> scratchpadManageHook (W.RationalRect 0.3 0.5 0.4 0.3)
       -- Inspect with xprop: appName is the first element in WM_CLASS, while
       -- className is the second.
       floatHook = composeAll [ appName =? "gimp-2.8"    --> doFloat
@@ -65,5 +65,6 @@ main = do
                              , appName =? "emacs" --> doF (W.shift "2")
                              , appName =? "urxvt" --> doF (W.shift "3")
                              , appName =? "NaviSimulator"   --> doF (W.shift "4")
-                             , appName =? "NavApp"      --> doFloat
+                             , appName =? "NavApp"      --> (doShift "3" <+> doFloat)
+                             , appName =? "pulseUi"      --> doF (W.shift "9")
                              ]
