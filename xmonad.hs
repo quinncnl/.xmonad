@@ -38,6 +38,7 @@ main = do
   xmproc <- spawnPipe "/usr/local/pulse/pulseUi"
   xmproc <- spawnPipe "google-chrome"
   xmproc <- spawnPipe "emacs"
+  xmproc <- spawnPipe "urxvt"
   xmonad $ ewmh kde4Config
     { terminal = "urxvt"
     , modMask = mod4Mask
